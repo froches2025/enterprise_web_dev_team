@@ -1,0 +1,150 @@
+{
+  "_comment": "JSON schema representations of the MoMo SMS database entities. Mirrors database_setup.sql exactly (table/column names, types, nullability). Author: Hussaina Abubakar Shehu (JSON Modeling & Documentation)",
+
+  "User": {
+    "_description": "Represents a row in the `users` table",
+    "UserID": {
+      "type": "integer",
+      "description": "Primary key, auto-incremented unique identifier"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Full name of the user"
+    },
+    "PhoneNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "unique": true,
+      "description": "Contact phone number, must be unique"
+    }
+  },
+
+  "User_example": {
+    "UserID": 1,
+    "Name": "Chidera Okafor",
+    "PhoneNumber": "+2348012345678"
+  },
+
+  "Transaction": {
+    "_description": "Represents a row in the `transactions` table",
+    "TransactionID": {
+      "type": "integer",
+      "description": "Primary key, auto-incremented unique identifier"
+    },
+    "UserID": {
+      "type": "integer",
+      "description": "Foreign key referencing users.UserID (the user who made the transaction)"
+    },
+    "Amount": {
+      "type": "number",
+      "format": "decimal(10,2)",
+      "constraint": "must be greater than 0 (chk_amount_valid)",
+      "description": "Transaction amount"
+    },
+    "TransactionDate": {
+      "type": "string",
+      "format": "date-time",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "When the transaction occurred"
+    }
+  },
+
+  "Transaction_example": {
+    "TransactionID": 101,
+    "UserID": 1,
+    "Amount": 5000.00,
+    "TransactionDate": "2026-09-10T14:32:00Z"
+  },
+
+  "Transaction_Category": {
+    "_description": "Represents a row in the `transaction_categories` table",
+    "CategoryID": {
+      "type": "integer",
+      "description": "Primary key, auto-incremented unique identifier"
+    },
+    "CategoryName": {
+      "type": "string",
+      "maxLength": 100,
+      "unique": true,
+      "description": "Name of the transaction category (e.g. Transfer, Payment, Withdrawal)"
+    }
+  },
+
+  "Transaction_Category_example": {
+    "CategoryID": 3,
+    "CategoryName": "Merchant Payment"
+  },
+
+  "Transaction_Category_Mapping": {
+    "_description": "Represents a row in the junction table `transaction_category_mapping`, resolving the many-to-many relationship between Transactions and Transaction_Categories",
+    "TransactionID": {
+      "type": "integer",
+      "description": "Foreign key referencing transactions.TransactionID"
+    },
+    "CategoryID": {
+      "type": "integer",
+      "description": "Foreign key referencing transaction_categories.CategoryID"
+    }
+  },
+
+  "Transaction_Category_Mapping_example": {
+    "TransactionID": 101,
+    "CategoryID": 3
+  },
+
+  "System_Log": {
+    "_description": "Represents a row in the `system_logs` table",
+    "LogID": {
+      "type": "integer",
+      "description": "Primary key, auto-incremented unique identifier"
+    },
+    "UserID": {
+      "type": ["integer", "null"],
+      "description": "Foreign key referencing users.UserID, nullable (set NULL if the user is deleted)"
+    },
+    "LogMessage": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Description of the logged event"
+    },
+    "LogDate": {
+      "type": "string",
+      "format": "date-time",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "When the log entry was created"
+    }
+  },
+
+  "System_Log_example": {
+    "LogID": 6,
+    "UserID": 1,
+    "LogMessage": "Transaction 101 processed successfully",
+    "LogDate": "2026-09-10T14:32:01Z"
+  },
+
+  "Complete_Transaction_Example": {
+    "_description": "A complete, API-ready JSON object for a single transaction, with related sender, category, and log data nested inside — this is how a client-facing endpoint (e.g. GET /transactions/101) would serialize the joined data from transactions, users, transaction_categories, transaction_category_mapping, and system_logs",
+    "transactionId": 101,
+    "amount": 5000.00,
+    "transactionDate": "2026-09-10T14:32:00Z",
+    "sender": {
+      "userId": 1,
+      "name": "Chidera Okafor",
+      "phoneNumber": "+2348012345678"
+    },
+    "categories": [
+      {
+        "categoryId": 3,
+        "categoryName": "Merchant Payment"
+      }
+    ],
+    "relatedLogs": [
+      {
+        "logId": 6,
+        "logMessage": "Transaction 101 processed successfully",
+        "logDate": "2026-09-10T14:32:01Z"
+      }
+    ]
+  }
+}
