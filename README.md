@@ -19,17 +19,53 @@ We are tracking our agile sprint progress, task distribution, and backlog using 
 ## Project Structure
 ```text
 ├── README.md
+├── api
+│   ├── __init__.py
+│   ├── app.py
+│   ├── db.py
+│   └── schemas.py
 ├── architecture.png
-├── .env.example
-├── requirements.txt
+├── data
+│   ├── db.sqlite3
+│   ├── logs
+│   │   ├── dead_letter
+│   │   └── etl.log
+│   ├── processed
+│   │   └── dashboard.json
+│   └── raw
+├── database
+├── docs
+│   └── ERD_Diagram.png
+├── etl
+│   ├── __init__.py
+│   ├── categorize.py
+│   ├── clean_normalize.py
+│   ├── config.py
+│   ├── load_db.py
+│   ├── parse_xml.py
+│   └── run.py
+├── examples
 ├── index.html
-├── web/
-│   ├── styles.css
-│   └── chart_handler.js
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── db.sqlite3
-├── etl/
-├── scripts/
-└── tests/
+├── requirements.txt
+├── scripts
+│   ├── export_json.sh
+│   ├── run_etl.sh
+│   └── serve_frontend.sh
+├── tests
+│   ├── test_categorize.py
+│   ├── test_clean_normalize.py
+│   └── test_parse_xml.py
+└── web
+    ├── chart_handler.js
+    └── styles.css
+
+14 directories, 27 files
+```
+
+## Database Design Rationale
+
+To establish a solid foundation for our codebase, we separated the MoMo SMS data into four distinct entities: Users, Transactions, Transaction_Categories, and System_Logs. Giving each entity its own individual table makes the data much easier to filter and manage. For example, if the application needs to locate a user's profile to display a greeting, the code can query the Users table directly without having to sort through thousands of unrelated transaction records. This separation of concerns prevents data duplication and keeps our queries highly efficient.
+
+Furthermore, we identified a many-to-many relationship between transactions and their classifications. Because a single transaction can fall under multiple categories (such as tagging an item as both a 'purchase' and a 'gift'), and a single category applies to many transactions, we introduced the Transaction_Category_Mapping table. This junction table serves as a clean intersection between Transactions and Transaction_Categories. It organizes the data securely, avoids cyclic data calls, and makes it significantly easier to sort and filter records by specific categories in the future.
+
+Finally, to maintain strict data integrity, we assigned Primary Keys (PK) to uniquely identify every record within its respective table, and Foreign Keys (FK) to securely link our relational tables together. The System_Logs table was intentionally kept independent so it can record system errors and activities without interfering with the core financial data structure.
