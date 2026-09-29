@@ -19,7 +19,7 @@ This project processes Mobile Money (MoMo) SMS data in XML format, cleans and ca
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/froches2025/enterprise_web_dev_team.git
-    cd REPLACE_WITH_REPOSITORY
+    cd enterprise_web_dev_team
     ```
 2. **Ensure the source data is present:**
     Place `modified_sms_v2.xml` in docs folder before running the ETL or benchmark commands.
@@ -94,8 +94,8 @@ The repository also contains the DSA implementation in `/dsa`, visual test evide
 ## Submission Links
 
 - **GitHub Repository:** [https://github.com/froches2025/enterprise_web_dev_team](https://github.com/froches2025/enterprise_web_dev_team)
-- **Team Participation Sheet:** [Replace with Google Sheets URL](https://docs.google.com/spreadsheets/d/REPLACE_WITH_SHEET_ID)
-- **PDF Design Report:** [Replace with Google Drive PDF URL](https://drive.google.com/file/d/REPLACE_WITH_FILE_ID/view)
+- **Team Participation Sheet:** [https://docs.google.com/spreadsheets/d/1acUvl2skJErdZpfmC4M6IhVHdun8ko9jWr3QF0tPqhA/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1acUvl2skJErdZpfmC4M6IhVHdun8ko9jWr3QF0tPqhA/edit?usp=sharing)
+- **PDF Design Report:** [https://drive.google.com/file/d/1_J0xTLtt_9M6_4U0vsDGnw_mhG-Qh1um/view?usp=sharing](https://drive.google.com/file/d/1_J0xTLtt_9M6_4U0vsDGnw_mhG-Qh1um/view?usp=sharing)
 
 ## Database Design Rationale
 
