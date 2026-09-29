@@ -1,4 +1,4 @@
-**-*98+68+98*+-8+8# Enterprise Web Development: Building and Securing a REST API
+# Enterprise Web Development: Building and Securing a REST API
 
 ## Project Description
 An enterprise-level fullstack application designed to process Mobile Money (MoMo) SMS data in XML format, clean and categorize transactions, store data in a SQLite relational database, and visualize metrics through an interactive frontend dashboard.
