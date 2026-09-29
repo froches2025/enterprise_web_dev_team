@@ -1,12 +1,39 @@
-# EnterpriseWebDevTeamwork
+**-*98+68+98*+-8+8# Enterprise Web Development: Building and Securing a REST API
 
 ## Project Description
 An enterprise-level fullstack application designed to process Mobile Money (MoMo) SMS data in XML format, clean and categorize transactions, store data in a SQLite relational database, and visualize metrics through an interactive frontend dashboard.
 
-## Team Members
-- Favour Mieye Michael - Froches
-- Annabel Kemasuode - akemasuode-crypto
-- Hussaina Abubakar Shehu - hussaina3
+## Team Members & Roles
+- **Favour Mieye Michael** - Froches (Team Lead / DevOps / API Server Routing)
+- **Annabel Kemasuode** - akemasuode-crypto (Data Parsing & DSA Implementation)
+- **Hussaina Abubakar Shehu** - hussaina3 (Authentication, Security & Testing)
+
+Team Task Sheet 1: [[https://docs.google.com/spreadsheets/d/1yz_lTUDztAgy1Ys5omRiPxsNjN_3dMH-DpGBZzNnlh8/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1yz_lTUDztAgy1Ys5omRiPxsNjN_3dMH-DpGBZzNnlh8/edit?usp=sharing)]
+Team Task Sheet 2: [[https://docs.google.com/spreadsheets/d/1acUvl2skJErdZpfmC4M6IhVHdun8ko9jWr3QF0tPqhA/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1acUvl2skJErdZpfmC4M6IhVHdun8ko9jWr3QF0tPqhA/edit?usp=sharing)]
+
+## Project Overview
+This project processes Mobile Money (MoMo) SMS data in XML format, cleans and categorizes transactions, stores the results in a SQLite database, and visualizes metrics through an interactive frontend dashboard. It also documents the REST API contract, uses Basic Authentication for protected endpoints, and includes an empirical comparison of Linear Search and Dictionary Lookup.
+
+## Setup & Running Instructions
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/froches2025/enterprise_web_dev_team.git
+    cd REPLACE_WITH_REPOSITORY
+    ```
+2. **Ensure the source data is present:**
+    Place `modified_sms_v2.xml` in docs folder before running the ETL or benchmark commands.
+3. **Run the DSA benchmark:**
+    ```bash
+    python3 dsa/benchmark.py
+    ```
+4. **Serve the frontend:**
+    ```bash
+    python3 -m http.server 8000
+    ```
+    Then open `http://localhost:8000` in a browser.
+
+The documented API endpoints are available in [docs/api_docs.md](docs/api_docs.md).
 
 ## System Architecture
 Our high-level system architecture illustrates the data flow from raw XML ingestion through the ETL pipeline, SQLite storage, and frontend visualization.
@@ -61,6 +88,14 @@ We are tracking our agile sprint progress, task distribution, and backlog using 
 
 14 directories, 27 files
 ```
+
+The repository also contains the DSA implementation in `/dsa`, visual test evidence in `/screenshots`, API endpoint documentation in `/docs/api_docs.md`, and the AI usage record in `/docs/ai_usage_log.md`.
+
+## Submission Links
+
+- **GitHub Repository:** [https://github.com/froches2025/enterprise_web_dev_team](https://github.com/froches2025/enterprise_web_dev_team)
+- **Team Participation Sheet:** [Replace with Google Sheets URL](https://docs.google.com/spreadsheets/d/REPLACE_WITH_SHEET_ID)
+- **PDF Design Report:** [Replace with Google Drive PDF URL](https://drive.google.com/file/d/REPLACE_WITH_FILE_ID/view)
 
 ## Database Design Rationale
 
